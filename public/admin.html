@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopEase — Audit Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="/">Shop<span>Ease</span></a>
+      <strong style="margin-right:auto">🛡️ Audit &amp; Governance Console</strong>
+      <div class="user-box"><label for="userSelect">Signed in as</label><select id="userSelect"></select></div>
+      <a class="nav-link" href="/">← Storefront</a>
+    </div>
+  </header>
+
+  <div class="console">
+    <div id="denied" class="banner bad hidden"></div>
+    <div id="verifyBanner" class="banner hidden"></div>
+
+    <div class="tiles" id="tiles"></div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Audit trail</h3>
+        <input id="q" placeholder="Search text, order ID, user…">
+        <select id="type">
+          <option value="">All events</option>
+          <option>chat_request</option><option>chat_response</option><option>tool_call</option>
+          <option>access_denied</option><option>guardrail</option><option>feedback</option><option>auth</option><option>admin</option>
+        </select>
+        <select id="decision"><option value="">Any decision</option><option>allow</option><option>deny</option></select>
+        <button class="btn" id="refresh">Refresh</button>
+        <button class="btn ghost" id="verify">🔗 Verify hash chain</button>
+        <button class="btn ghost hidden" id="tamper" title="Admin-only demo: modifies one record in memory">🧪 Simulate tampering</button>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>#</th><th>Time</th><th>Actor</th><th>Role</th><th>Event</th><th>Action / resource</th><th>Decision</th><th>Response</th><th>Hash</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h3>RBAC permission matrix</h3><span class="small" style="color:var(--muted)">Enforced server-side in the tool layer — the LLM can never exceed the signed-in user's grants.</span></div>
+      <div class="table-wrap"><table class="data matrix" id="matrix"></table></div>
+    </section>
+  </div>
+
+  <aside class="drawer hidden" id="drawer">
+    <header><h3 id="drawerTitle">Response audit</h3><button id="drawerClose" aria-label="Close">×</button></header>
+    <div class="content" id="drawerBody"></div>
+  </aside>
+
+  <script src="common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

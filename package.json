@@ -1,0 +1,19 @@
+{
+  "name": "shopping-chat-assistant",
+  "version": "1.0.0",
+  "description": "ShopEase — conversational shopping & CRM assistant embedded in a retail website (RBAC, audit trail, price history, recommendations)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "express": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
